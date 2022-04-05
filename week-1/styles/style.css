@@ -16,6 +16,10 @@ header{
     background-color: gray;
 }
 
+.fit-picture {
+    width: 250px;
+}
+
 .main{
     display: grid;
     grid-area: main_content;
