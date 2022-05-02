@@ -15,17 +15,22 @@ function addMarker(lat,lng,title,message){
     return message
 }
 
-const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSpOaH94y-oguAqbtcvZRyKdrEYiT1JOzW0jmmreznYS8THdQTYQ6cUB7J_68SZLgjpXbB_FY_nDf2A/pub?output=csv"
+const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS2WyfKTyZJ-_ja3GGrxoAXwranavyDGXYsxeFUO4nvHpCJrkKhChymXQqUEyhdGLnz9VN6BJv5tOjp/pub?gid=1560504149&single=true&output=csv"
 
 function loadData(url){
-    fetch(url)
-        .then(response => {
-            console.log(response)
-            return response
-        })
-        .then(data =>{
-            // do something with the data
-        })
+    Papa.parse(dataUrl, {
+        header: true,
+        download: true,
+        complete: results => console.log(results)
+    })
+}
+
+function processData(results){
+    console.log(results)
+    results.data.forEach(data => {
+        console.log(data)
+        addMarker(data.lat,data.lng,data['OpenEnded'],data['Is your English your first language?'])
+    })
 }
 // this is our function call to get the data
 loadData(dataUrl)
