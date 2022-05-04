@@ -21,11 +21,9 @@ function loadData(url){
     Papa.parse(dataUrl, {
         header: true,
         download: true,
-        complete: results => console.log(results)
+        complete: results => processData(results)
     })
 }
-// this is our function call to get the data
-loadData(dataUrl)
 
 function processData(results){
     console.log(results) //for debugging: this can help us see if the results are what we want
@@ -34,3 +32,6 @@ function processData(results){
         addMarker(data.lat,data.lng,data['Describe what they looked like:'],data['What about them made you believe they were fruity?'])
     })
 }
+
+// this is our function call to get the data
+loadData(dataUrl)
