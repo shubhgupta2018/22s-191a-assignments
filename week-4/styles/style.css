@@ -9,11 +9,13 @@ body{
 
 header{
     grid-area: header;
-    background-color: white;
-}
+    background-color: red; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, Red , Orange, Yellow, Green, Blue, Indigo, Violet);}
 
 #footer{
     grid-area: footer;
+    background-color: red; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to right, Red , Orange, Yellow, Green, Blue, Indigo, Violet);
 }
 
 .main{
@@ -26,6 +28,7 @@ header{
 
 #contents{
     grid-area: content;
+    background-color: rgba(0, 255, 255, 0);
 }
 
 #the_map{
