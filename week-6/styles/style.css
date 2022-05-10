@@ -1,21 +1,25 @@
 body{
     display: grid;
-    /* grid-template-columns: 1fr;  */
-    grid-auto-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 120px auto auto;
     grid-template-areas: "header" "main_content" "footer";
     background-color: whitesmoke;
+    gap: 10px;
     /* height: 100vh; */
 }
 
 header{
     grid-area: header;
-    background-color: red; /* For browsers that do not support gradients */
-    background-image: linear-gradient(to right, Red , Orange, Yellow, Green, Blue, Indigo, Violet);}
+    background-color: red;
+    background-image: linear-gradient(to right, Red , Orange, Yellow, Green, Blue, Indigo, Violet);
+    justify-self: center;
+}
 
 #footer{
     grid-area: footer;
-    background-color: red; /* For browsers that do not support gradients */
+    background-color: red;
     background-image: linear-gradient(to right, Red , Orange, Yellow, Green, Blue, Indigo, Violet);
+    position: sticky; bottom: 0;
 }
 
 .main{
@@ -44,5 +48,7 @@ header{
 }
 
 #placeForButtons{
-    grid-area: buttonHome; 
+    grid-area: buttonHome;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
 }
