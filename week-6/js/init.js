@@ -1,5 +1,5 @@
 // declare variables
-let mapOptions = {'center': [34.0709,-118.444],'zoom':5}
+let mapOptions = {'center': [34.0709,-118.444],'zoom':11}
 
 // use the variables
 const map = L.map('the_map').setView(mapOptions.center, mapOptions.zoom);
@@ -10,8 +10,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // create a function to add markers
 function addMarker(data){
-    console.log(message)
-    L.marker([data.lat,data.lng]).addTo(map).bindPopup(`<h2>${data['Describe what they looked like:']}</h2> <h3> ${data['What about them made you believe they were fruity?']}</h3>`) 
+    console.log(data)
+    L.marker([data.lat,data.lng]).addTo(map).bindPopup(`<h2>Describe what they looked like:</h2>  <p>${data['Describe what they looked like:']}</p> <h3>What about them made you believe they were fruity? </h3> <p> ${data['What about them made you believe they were fruity?']}</p>`) 
     createButtons(data.lat,data.lng,data['Location Where You Last Saw a Gay Person:'])
     return
 }
