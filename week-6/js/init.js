@@ -13,7 +13,7 @@ function addMarker(data){
     console.log(message)
     L.marker([data.lat,data.lng]).addTo(map).bindPopup(`<h2> Describe what they looked like: -- ${data['Describe what they looked like:']}</h2> <h3> What about them made you believe they were fruity? -- ${data['What about them made you believe they were fruity?']}</h3>`)
     createButtons(data.lat,data.lng,data['Location Where You Last Saw a Gay Person:'])
-    return data.message
+    return
 }
 
 // create function to add buttons
@@ -46,7 +46,6 @@ function processData(results){
     results.data.forEach(data => {
         console.log(data) // for debugging: are we seeing each data correctly?
         addMarker(data)
-        addMarker(data.lat,data.lng,data['Describe what they looked like:'],data['What about them made you believe they were fruity?'])
     })
 }
 
