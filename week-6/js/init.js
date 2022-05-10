@@ -11,7 +11,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // create a function to add markers
 function addMarker(data){
     console.log(message)
-    L.marker([data.lat,data.lng]).addTo(map).bindPopup(`<h2> Describe what they looked like: -- ${data['Describe what they looked like:']}</h2> <h3> What about them made you believe they were fruity? -- ${data['What about them made you believe they were fruity?']}</h3>`)
+    L.marker([data.lat,data.lng]).addTo(map).bindPopup('<h2>${data['Describe what they looked like:']}</h2> <h3>${data['What about them made you believe they were fruity?']}</h3>') 
     createButtons(data.lat,data.lng,data['Location Where You Last Saw a Gay Person:'])
     return
 }
