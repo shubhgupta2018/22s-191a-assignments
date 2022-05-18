@@ -5,8 +5,17 @@ let theySlay = L.featureGroup();
 let noSlay = L.featureGroup();
 
 let layers = {
-    'enby' : theySlay
+    'enby' : theySlay,
     'not enby' : noSlay
+}
+
+let circleOptions = {
+    radius: 4,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
 }
 
 const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmc3kR3gIJ5Mnm_4y3v00tZnGrAgUf1vbLZMx2DexawmGZwRdNObJYdlENj3hEiVQZ6xGNxTOUAura/pub?output=csv"
@@ -15,22 +24,32 @@ const dataUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRmc3kR3gIJ5Mnm
 // use the variables
 const map = L.map('the_map').setView(mapOptions.center, mapOptions.zoom);
 
+let Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+    maxZoom: 16
+});
+
+Esri_WorldGrayCanvas.addTo(map)
+
+
 // add layer control box
 L.control.layers(null,layers).addTo(map)
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+//L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//}).addTo(map);
 
 // create a function to add markers
 function addMarker(data){
     if(data['Describe what they looked like:'].includes('she/they') || data['What about them made you believe they were fruity?'].includes('/they')) {
         //the goal of this condition is to identify gay spottings of he/theys and she/theys 
-        theySlay.addLayer(L.marker([data.lat,data.lng]).bindPopup(`<h1>ENBY ALERT! SLAY</h1> <h2>Describe what they looked like:</h2>  <p>${data['Describe what they looked like:']}</p> <h3>What about them made you believe they were fruity? </h3> <p> ${data['What about them made you believe they were fruity?']}</p>`))
+        circleOptions.fillColor = "red"
+        theySlay.addLayer(L.circleMarker([data.lat,data.lng], circleOptions).bindPopup(`<h1>ENBY ALERT! SLAY</h1> <h2>Describe what they looked like:</h2>  <p>${data['Describe what they looked like:']}</p> <h3>What about them made you believe they were fruity? </h3> <p> ${data['What about them made you believe they were fruity?']}</p>`))
         createButtons(data.lat,data.lng,data['Location Where You Last Saw a Gay Person:'])
     }
     else{
-        noSlay.addLayer(L.marker([data.lat,data.lng]).bindPopup(`<h1>Naurrr it's a cis ;-; </h1> <h2>Describe what they looked like:</h2>  <p>${data['Describe what they looked like:']}</p> <h3>What about them made you believe they were fruity? </h3> <p> ${data['What about them made you believe they were fruity?']}</p>`))
+        circleOptions.fillColor = 'blue'
+        noSlay.addLayer(L.circleMarker([data.lat,data.lng], circleOptions).bindPopup(`<h1>Naurrr it's a cis ;-; </h1> <h2>Describe what they looked like:</h2>  <p>${data['Describe what they looked like:']}</p> <h3>What about them made you believe they were fruity? </h3> <p> ${data['What about them made you believe they were fruity?']}</p>`))
         createButtons(data.lat,data.lng,data['Location Where You Last Saw a Gay Person:'])
     }
     return data
